@@ -1,0 +1,8 @@
+D:\TempDB\Project\SSAS_AM\SSAS_AM\bin\Model.asdatabase
+D:\TempDB\Project\SSAS_AM\SSAS_AM\bin\Model.deploymenttargets
+D:\TempDB\Project\SSAS_AM\SSAS_AM\bin\Model.deploymentoptions
+D:\TempDB\Project\SSAS_AM\SSAS_AM\obj\Development\SSAS_AM.smproj.AssemblyReference.cache
+D:\TempDB\Project\SSAS_AM\SSAS_AM\obj\Development\SSAS_AM.smproj.CoreCompileInputs.cache
+D:\TempDB\Project\SSAS_AM\SSAS_AM\obj\Development\Model.asdatabase
+D:\TempDB\Project\SSAS_AM\SSAS_AM\obj\Development\Model.deploymentoptions
+D:\TempDB\Project\SSAS_AM\SSAS_AM\obj\Development\Model.deploymenttargets

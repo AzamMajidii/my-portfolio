@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="CDC_AdventureWorksLT20221"
+  DTS:DTSID="{C91BB248-9CE9-4A86-8B85-608AAF88C067}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=.\SQLS2022;Initial Catalog=AdventureWorksLT2022;Integrated Security=True;Encrypt=False;Application Name=SSIS-Package1-{C91BB248-9CE9-4A86-8B85-608AAF88C067}.\SQLS2022.AdventureWorksLT20221;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>

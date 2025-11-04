@@ -1,0 +1,1043 @@
+{
+  "name": "SSAS_AM",
+  "compatibilityLevel": 1500,
+  "model": {
+    "culture": "en-US",
+    "dataSources": [
+      {
+        "type": "structured",
+        "name": "SQL/ \\SQLS2022;DW",
+        "connectionDetails": {
+          "protocol": "tds",
+          "address": {
+            "server": ".\\SQLS2022",
+            "database": "DW"
+          },
+          "authentication": null,
+          "query": null
+        },
+        "credential": {
+          "AuthenticationKind": "Windows",
+          "kind": "SQL",
+          "path": ".\\sqls2022;DW",
+          "Username": "WWEX-HL390X2\\Percision",
+          "EncryptConnection": false
+        }
+      }
+    ],
+    "tables": [
+      {
+        "name": "DimAddress",
+        "columns": [
+          {
+            "name": "AddressKey",
+            "dataType": "int64",
+            "sourceColumn": "AddressKey"
+          },
+          {
+            "name": "AddressAlternateKey",
+            "dataType": "int64",
+            "sourceColumn": "AddressAlternateKey"
+          },
+          {
+            "name": "FullAddress",
+            "dataType": "string",
+            "sourceColumn": "FullAddress"
+          },
+          {
+            "name": "City",
+            "dataType": "string",
+            "sourceColumn": "City"
+          },
+          {
+            "name": "StateProvince",
+            "dataType": "string",
+            "sourceColumn": "StateProvince"
+          },
+          {
+            "name": "CountryRegion",
+            "dataType": "string",
+            "sourceColumn": "CountryRegion"
+          },
+          {
+            "name": "PostalCode",
+            "dataType": "string",
+            "sourceColumn": "PostalCode"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                "    dbo_DimAddress = Source{[Schema=\"dbo\",Item=\"DimAddress\"]}[Data]",
+                "in",
+                "    dbo_DimAddress"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimCustomer",
+        "columns": [
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerKey"
+          },
+          {
+            "name": "CustomerAlternateKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerAlternateKey"
+          },
+          {
+            "name": "Gender",
+            "dataType": "string",
+            "sourceColumn": "Gender"
+          },
+          {
+            "name": "FullName",
+            "dataType": "string",
+            "sourceColumn": "FullName"
+          },
+          {
+            "name": "CompanyName",
+            "dataType": "string",
+            "sourceColumn": "CompanyName"
+          },
+          {
+            "name": "SalesPerson",
+            "dataType": "string",
+            "sourceColumn": "SalesPerson"
+          },
+          {
+            "name": "EmailAddress",
+            "dataType": "string",
+            "sourceColumn": "EmailAddress"
+          },
+          {
+            "name": "Phone",
+            "dataType": "string",
+            "sourceColumn": "Phone"
+          },
+          {
+            "name": "StartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "StartDate"
+          },
+          {
+            "name": "EndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "EndDate"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                "    dbo_DimCustomer = Source{[Schema=\"dbo\",Item=\"DimCustomer\"]}[Data]",
+                "in",
+                "    dbo_DimCustomer"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "OrderDimDate",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "Miladi",
+            "dataType": "dateTime",
+            "sourceColumn": "Miladi"
+          },
+          {
+            "name": "M_MidYear_T",
+            "dataType": "string",
+            "sourceColumn": "M_MidYear_T"
+          },
+          {
+            "name": "M_Quarter_N",
+            "dataType": "int64",
+            "sourceColumn": "M_Quarter_N"
+          },
+          {
+            "name": "M_Month_T",
+            "dataType": "string",
+            "sourceColumn": "M_Month_T"
+          },
+          {
+            "name": "M_Month_N",
+            "dataType": "int64",
+            "sourceColumn": "M_Month_N"
+          },
+          {
+            "name": "M_WeekDay_T",
+            "dataType": "string",
+            "sourceColumn": "M_WeekDay_T"
+          },
+          {
+            "name": "M_Week_N",
+            "dataType": "int64",
+            "sourceColumn": "M_Week_N"
+          },
+          {
+            "name": "Jalali",
+            "dataType": "string",
+            "sourceColumn": "Jalali"
+          },
+          {
+            "name": "Jalali_1",
+            "dataType": "string",
+            "sourceColumn": "Jalali_1"
+          },
+          {
+            "name": "Jalali_2",
+            "dataType": "string",
+            "sourceColumn": "Jalali_2"
+          },
+          {
+            "name": "Jalali_3",
+            "dataType": "string",
+            "sourceColumn": "Jalali_3"
+          },
+          {
+            "name": "J_Year_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Year_N"
+          },
+          {
+            "name": "J_Nime_T",
+            "dataType": "string",
+            "sourceColumn": "J_Nime_T"
+          },
+          {
+            "name": "J_Quarter_T",
+            "dataType": "string",
+            "sourceColumn": "J_Quarter_T"
+          },
+          {
+            "name": "J_Quarter_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Quarter_N"
+          },
+          {
+            "name": "J_Month_T",
+            "dataType": "string",
+            "sourceColumn": "J_Month_T"
+          },
+          {
+            "name": "J_Month_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Month_N"
+          },
+          {
+            "name": "J_WeekDay_N",
+            "dataType": "int64",
+            "sourceColumn": "J_WeekDay_N"
+          },
+          {
+            "name": "J_WeekDay_T",
+            "dataType": "string",
+            "sourceColumn": "J_WeekDay_T"
+          },
+          {
+            "name": "J_Week_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Week_N"
+          },
+          {
+            "name": "J_Day_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Day_N"
+          },
+          {
+            "name": "J_YMD_N",
+            "dataType": "dateTime",
+            "sourceColumn": "J_YMD_N"
+          },
+          {
+            "name": "J_Holiday",
+            "dataType": "string",
+            "sourceColumn": "J_Holiday"
+          },
+          {
+            "name": "Hijri",
+            "dataType": "string",
+            "sourceColumn": "Hijri"
+          },
+          {
+            "name": "H_Year_N",
+            "dataType": "int64",
+            "sourceColumn": "H_Year_N"
+          },
+          {
+            "name": "H_Month_T",
+            "dataType": "string",
+            "sourceColumn": "H_Month_T"
+          },
+          {
+            "name": "H_Month_N",
+            "dataType": "int64",
+            "sourceColumn": "H_Month_N"
+          },
+          {
+            "name": "H_Day_N",
+            "dataType": "int64",
+            "sourceColumn": "H_Day_N"
+          },
+          {
+            "name": "H_WeekDay_T",
+            "dataType": "string",
+            "sourceColumn": "H_WeekDay_T"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                "    dbo_DimDate = Source{[Schema=\"dbo\",Item=\"DimDate\"]}[Data]",
+                "in",
+                "    dbo_DimDate"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "DimProduct",
+        "columns": [
+          {
+            "name": "ProductKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductKey"
+          },
+          {
+            "name": "ProductAlternateKey",
+            "dataType": "int64",
+            "sourceColumn": "ProductAlternateKey"
+          },
+          {
+            "name": "Name",
+            "dataType": "string",
+            "sourceColumn": "Name"
+          },
+          {
+            "name": "ProductNumber",
+            "dataType": "string",
+            "sourceColumn": "ProductNumber"
+          },
+          {
+            "name": "Color",
+            "dataType": "string",
+            "sourceColumn": "Color"
+          },
+          {
+            "name": "StandardCost",
+            "dataType": "double",
+            "sourceColumn": "StandardCost"
+          },
+          {
+            "name": "ListPrice",
+            "dataType": "double",
+            "sourceColumn": "ListPrice"
+          },
+          {
+            "name": "Size",
+            "dataType": "string",
+            "sourceColumn": "Size"
+          },
+          {
+            "name": "Weight",
+            "dataType": "double",
+            "sourceColumn": "Weight"
+          },
+          {
+            "name": "ProductCategoryID",
+            "dataType": "int64",
+            "sourceColumn": "ProductCategoryID"
+          },
+          {
+            "name": "ProductModelID",
+            "dataType": "int64",
+            "sourceColumn": "ProductModelID"
+          },
+          {
+            "name": "SellStartDate",
+            "dataType": "dateTime",
+            "sourceColumn": "SellStartDate"
+          },
+          {
+            "name": "SellEndDate",
+            "dataType": "dateTime",
+            "sourceColumn": "SellEndDate"
+          },
+          {
+            "name": "ParentProductCategoryID",
+            "dataType": "int64",
+            "sourceColumn": "ParentProductCategoryID"
+          },
+          {
+            "name": "ProductCategoryName",
+            "dataType": "string",
+            "sourceColumn": "ProductCategoryName"
+          },
+          {
+            "name": "ProductModelName",
+            "dataType": "string",
+            "sourceColumn": "ProductModelName"
+          },
+          {
+            "name": "IsCurrent",
+            "dataType": "boolean",
+            "sourceColumn": "IsCurrent"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                "    dbo_DimProduct = Source{[Schema=\"dbo\",Item=\"DimProduct\"]}[Data]",
+                "in",
+                "    dbo_DimProduct"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "FactSales",
+        "columns": [
+          {
+            "name": "SalesOrderID",
+            "dataType": "int64",
+            "sourceColumn": "SalesOrderID"
+          },
+          {
+            "name": "OrderDateKey",
+            "dataType": "int64",
+            "sourceColumn": "OrderDateKey"
+          },
+          {
+            "name": "ShipDateKey",
+            "dataType": "int64",
+            "sourceColumn": "ShipDateKey"
+          },
+          {
+            "name": "SalesOrderNumber",
+            "dataType": "string",
+            "sourceColumn": "SalesOrderNumber"
+          },
+          {
+            "name": "CustomerKey",
+            "dataType": "int64",
+            "sourceColumn": "CustomerKey"
+          },
+          {
+            "name": "AddressKey",
+            "dataType": "int64",
+            "sourceColumn": "AddressKey"
+          },
+          {
+            "name": "SubTotal",
+            "dataType": "double",
+            "sourceColumn": "SubTotal"
+          },
+          {
+            "name": "TaxAmt",
+            "dataType": "double",
+            "sourceColumn": "TaxAmt"
+          },
+          {
+            "name": "Freight",
+            "dataType": "double",
+            "sourceColumn": "Freight"
+          },
+          {
+            "name": "TotalDue",
+            "dataType": "double",
+            "sourceColumn": "TotalDue"
+          },
+          {
+            "name": "SalesOrderDetailID",
+            "dataType": "int64",
+            "sourceColumn": "SalesOrderDetailID"
+          },
+          {
+            "name": "OrderQty",
+            "dataType": "int64",
+            "sourceColumn": "OrderQty"
+          },
+          {
+            "name": "ProductID",
+            "dataType": "int64",
+            "sourceColumn": "ProductID"
+          },
+          {
+            "name": "UnitPrice",
+            "dataType": "double",
+            "sourceColumn": "UnitPrice"
+          },
+          {
+            "name": "UnitPriceDiscount",
+            "dataType": "double",
+            "sourceColumn": "UnitPriceDiscount"
+          },
+          {
+            "name": "LineTotal",
+            "dataType": "double",
+            "sourceColumn": "LineTotal"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                "    dbo_FactSales = Source{[Schema=\"dbo\",Item=\"FactSales\"]}[Data]",
+                "in",
+                "    dbo_FactSales"
+              ]
+            }
+          },
+          {
+            "name": "Patition_Customer843",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                "    dbo_FactSales = Source{[Schema=\"dbo\",Item=\"FactSales\"]}[Data]",
+                "in",
+                "    dbo_FactSales"
+              ]
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>let",
+                  "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                  "    dbo_FactSales = Source{[Schema=\"dbo\",Item=\"FactSales\"]}[Data]",
+                  "in",
+                  "    dbo_FactSales</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Partition_OtherCustomer",
+            "mode": "import",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                "    dbo_FactSales = Source{[Schema=\"dbo\",Item=\"FactSales\"]}[Data]",
+                "in",
+                "    dbo_FactSales"
+              ]
+            },
+            "annotations": [
+              {
+                "name": "QueryEditorSerialization",
+                "value": [
+                  "<?xml version=\"1.0\" encoding=\"UTF-16\"?><Gemini xmlns=\"QueryEditorSerialization\"><AnnotationContent><![CDATA[<RSQueryCommandText>let",
+                  "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                  "    dbo_FactSales = Source{[Schema=\"dbo\",Item=\"FactSales\"]}[Data]",
+                  "in",
+                  "    dbo_FactSales</RSQueryCommandText><RSQueryCommandType>Text</RSQueryCommandType><RSQueryDesignState></RSQueryDesignState>]]></AnnotationContent></Gemini>"
+                ]
+              }
+            ]
+          }
+        ],
+        "measures": [
+          {
+            "name": "SalesAmount",
+            "expression": [
+              "",
+              "        SUM(FactSales[LineTotal])"
+            ],
+            "kpi": {
+              "targetExpression": "100",
+              "statusGraphic": "Three Symbols UnCircled Colored",
+              "statusExpression": [
+                "var x='FactSales'[SalesAmount] return",
+                "            if(ISBLANK(x),BLANK(),",
+                "                    If(x<35,-1,",
+                "\t                If(x<75,0,1)",
+                "                )",
+                "            )",
+                "            "
+              ],
+              "annotations": [
+                {
+                  "name": "GoalType",
+                  "value": "StaticValue"
+                },
+                {
+                  "name": "KpiStatusType",
+                  "value": "Linear"
+                },
+                {
+                  "name": "KpiThresholdType",
+                  "value": "Absolute"
+                },
+                {
+                  "name": "KpiThresholdOrdering",
+                  "value": "Ascending"
+                },
+                {
+                  "name": "KpiThresholdCount",
+                  "value": "2"
+                },
+                {
+                  "name": "KpiThreshold_0",
+                  "value": "35"
+                },
+                {
+                  "name": "KpiThreshold_1",
+                  "value": "75"
+                }
+              ]
+            }
+          },
+          {
+            "name": "SalesQuantity",
+            "expression": [
+              "",
+              "            SUM(FactSales[OrderQty])"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "ShipDimDate",
+        "columns": [
+          {
+            "name": "DateKey",
+            "dataType": "int64",
+            "sourceColumn": "DateKey"
+          },
+          {
+            "name": "Miladi",
+            "dataType": "dateTime",
+            "sourceColumn": "Miladi"
+          },
+          {
+            "name": "M_MidYear_T",
+            "dataType": "string",
+            "sourceColumn": "M_MidYear_T"
+          },
+          {
+            "name": "M_Quarter_N",
+            "dataType": "int64",
+            "sourceColumn": "M_Quarter_N"
+          },
+          {
+            "name": "M_Month_T",
+            "dataType": "string",
+            "sourceColumn": "M_Month_T"
+          },
+          {
+            "name": "M_Month_N",
+            "dataType": "int64",
+            "sourceColumn": "M_Month_N"
+          },
+          {
+            "name": "M_WeekDay_T",
+            "dataType": "string",
+            "sourceColumn": "M_WeekDay_T"
+          },
+          {
+            "name": "M_Week_N",
+            "dataType": "int64",
+            "sourceColumn": "M_Week_N"
+          },
+          {
+            "name": "Jalali",
+            "dataType": "string",
+            "sourceColumn": "Jalali"
+          },
+          {
+            "name": "Jalali_1",
+            "dataType": "string",
+            "sourceColumn": "Jalali_1"
+          },
+          {
+            "name": "Jalali_2",
+            "dataType": "string",
+            "sourceColumn": "Jalali_2"
+          },
+          {
+            "name": "Jalali_3",
+            "dataType": "string",
+            "sourceColumn": "Jalali_3"
+          },
+          {
+            "name": "J_Year_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Year_N"
+          },
+          {
+            "name": "J_Nime_T",
+            "dataType": "string",
+            "sourceColumn": "J_Nime_T"
+          },
+          {
+            "name": "J_Quarter_T",
+            "dataType": "string",
+            "sourceColumn": "J_Quarter_T"
+          },
+          {
+            "name": "J_Quarter_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Quarter_N"
+          },
+          {
+            "name": "J_Month_T",
+            "dataType": "string",
+            "sourceColumn": "J_Month_T"
+          },
+          {
+            "name": "J_Month_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Month_N"
+          },
+          {
+            "name": "J_WeekDay_N",
+            "dataType": "int64",
+            "sourceColumn": "J_WeekDay_N"
+          },
+          {
+            "name": "J_WeekDay_T",
+            "dataType": "string",
+            "sourceColumn": "J_WeekDay_T"
+          },
+          {
+            "name": "J_Week_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Week_N"
+          },
+          {
+            "name": "J_Day_N",
+            "dataType": "int64",
+            "sourceColumn": "J_Day_N"
+          },
+          {
+            "name": "J_YMD_N",
+            "dataType": "dateTime",
+            "sourceColumn": "J_YMD_N"
+          },
+          {
+            "name": "J_Holiday",
+            "dataType": "string",
+            "sourceColumn": "J_Holiday"
+          },
+          {
+            "name": "Hijri",
+            "dataType": "string",
+            "sourceColumn": "Hijri"
+          },
+          {
+            "name": "H_Year_N",
+            "dataType": "int64",
+            "sourceColumn": "H_Year_N"
+          },
+          {
+            "name": "H_Month_T",
+            "dataType": "string",
+            "sourceColumn": "H_Month_T"
+          },
+          {
+            "name": "H_Month_N",
+            "dataType": "int64",
+            "sourceColumn": "H_Month_N"
+          },
+          {
+            "name": "H_Day_N",
+            "dataType": "int64",
+            "sourceColumn": "H_Day_N"
+          },
+          {
+            "name": "H_WeekDay_T",
+            "dataType": "string",
+            "sourceColumn": "H_WeekDay_T"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Partition",
+            "dataView": "full",
+            "source": {
+              "type": "m",
+              "expression": [
+                "let",
+                "    Source = #\"SQL/ \\SQLS2022;DW\",",
+                "    dbo_DimDate = Source{[Schema=\"dbo\",Item=\"DimDate\"]}[Data]",
+                "in",
+                "    dbo_DimDate"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "relationships": [
+      {
+        "name": "86972468-e398-4572-9cf3-f8b6a6398213",
+        "fromTable": "FactSales",
+        "fromColumn": "CustomerKey",
+        "toTable": "DimCustomer",
+        "toColumn": "CustomerKey"
+      },
+      {
+        "name": "9fee3269-6a48-4919-aaf1-72bfbab9a12e",
+        "fromTable": "FactSales",
+        "fromColumn": "AddressKey",
+        "toTable": "DimAddress",
+        "toColumn": "AddressKey"
+      },
+      {
+        "name": "1c7ca66d-0b26-4f22-bfdf-8f83a2aab088",
+        "fromTable": "FactSales",
+        "fromColumn": "ShipDateKey",
+        "toTable": "ShipDimDate",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "f1483638-72b2-4ac3-8e73-54b6d6776bf7",
+        "fromTable": "FactSales",
+        "fromColumn": "OrderDateKey",
+        "toTable": "OrderDimDate",
+        "toColumn": "DateKey"
+      },
+      {
+        "name": "9302148d-b141-4461-a56c-68e5f652d0c9",
+        "fromTable": "FactSales",
+        "fromColumn": "ProductID",
+        "toTable": "DimProduct",
+        "toColumn": "ProductKey"
+      }
+    ],
+    "perspectives": [
+      {
+        "name": "01",
+        "tables": [
+          {
+            "name": "DimAddress",
+            "columns": [
+              {
+                "name": "AddressAlternateKey"
+              },
+              {
+                "name": "AddressKey"
+              },
+              {
+                "name": "City"
+              },
+              {
+                "name": "CountryRegion"
+              },
+              {
+                "name": "FullAddress"
+              },
+              {
+                "name": "PostalCode"
+              },
+              {
+                "name": "StateProvince"
+              }
+            ]
+          },
+          {
+            "name": "DimCustomer",
+            "columns": [
+              {
+                "name": "CompanyName"
+              },
+              {
+                "name": "CustomerAlternateKey"
+              },
+              {
+                "name": "CustomerKey"
+              },
+              {
+                "name": "EmailAddress"
+              },
+              {
+                "name": "EndDate"
+              },
+              {
+                "name": "FullName"
+              },
+              {
+                "name": "Gender"
+              },
+              {
+                "name": "SalesPerson"
+              },
+              {
+                "name": "StartDate"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "02",
+        "tables": [
+          {
+            "name": "DimCustomer",
+            "columns": [
+              {
+                "name": "CompanyName"
+              },
+              {
+                "name": "CustomerAlternateKey"
+              },
+              {
+                "name": "CustomerKey"
+              },
+              {
+                "name": "EmailAddress"
+              },
+              {
+                "name": "EndDate"
+              },
+              {
+                "name": "FullName"
+              },
+              {
+                "name": "Gender"
+              },
+              {
+                "name": "Phone"
+              },
+              {
+                "name": "SalesPerson"
+              },
+              {
+                "name": "StartDate"
+              }
+            ]
+          },
+          {
+            "name": "DimProduct",
+            "columns": [
+              {
+                "name": "Color"
+              },
+              {
+                "name": "IsCurrent"
+              },
+              {
+                "name": "ListPrice"
+              },
+              {
+                "name": "Name"
+              },
+              {
+                "name": "ParentProductCategoryID"
+              },
+              {
+                "name": "ProductAlternateKey"
+              },
+              {
+                "name": "ProductCategoryID"
+              },
+              {
+                "name": "ProductCategoryName"
+              },
+              {
+                "name": "ProductKey"
+              },
+              {
+                "name": "ProductModelID"
+              },
+              {
+                "name": "ProductModelName"
+              },
+              {
+                "name": "ProductNumber"
+              },
+              {
+                "name": "SellEndDate"
+              },
+              {
+                "name": "SellStartDate"
+              },
+              {
+                "name": "Size"
+              },
+              {
+                "name": "StandardCost"
+              },
+              {
+                "name": "Weight"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "roles": [
+      {
+        "name": "Role_01",
+        "modelPermission": "read",
+        "tablePermissions": [
+          {
+            "name": "DimProduct",
+            "filterExpression": "DimProduct[Color] == \"Red\""
+          },
+          {
+            "name": "OrderDimDate",
+            "filterExpression": "OrderDimDate[J_Year_N] == 1380",
+            "metadataPermission": "none"
+          },
+          {
+            "name": "ShipDimDate",
+            "metadataPermission": "none"
+          }
+        ]
+      }
+    ],
+    "annotations": [
+      {
+        "name": "ClientCompatibilityLevel",
+        "value": "600"
+      }
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0"?>
+<DTS:ConnectionManager xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:ObjectName="ETL_Setting"
+  DTS:DTSID="{311BBC51-D956-4DE8-8EBC-F3EFA59A4699}"
+  DTS:CreationName="ADO.NET:System.Data.SqlClient.SqlConnection, System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+  <DTS:ObjectData>
+    <DTS:ConnectionManager
+      DTS:ConnectionString="Data Source=.\SQLS2022;Initial Catalog=ETL_Setting;Integrated Security=True;Encrypt=False;Application Name=SSIS-Package1-{311BBC51-D956-4DE8-8EBC-F3EFA59A4699}.\SQLS2022.ETL_Setting;" />
+  </DTS:ObjectData>
+</DTS:ConnectionManager>
