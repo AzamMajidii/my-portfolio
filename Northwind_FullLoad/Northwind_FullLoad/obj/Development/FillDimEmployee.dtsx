@@ -1,0 +1,1397 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/6/2025 11:20:30 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WWEX-HL390X2"
+  DTS:CreatorName="WWEX-HL390X2\Az.majidiiii"
+  DTS:DTSID="{92CCFD0F-2B11-454C-ACC8-E5B077330694}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="3"
+  DTS:VersionGUID="{468B7B63-F1DA-485D-91FE-0BFB8DDE7858}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert into DimEmployee"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{2049E1AD-2310-4B98-9807-4463D6B0DE0D}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert into DimEmployee"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Insert into DimEmployee\Balanced Data Distributor"
+              componentClassID="Microsoft.BDD"
+              contactInfo="Balanced Data Distributor;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Evaluates and directs rows in a dataset to multiple destinations."
+              name="Balanced Data Distributor">
+              <inputs>
+                <input
+                  refId="Package\Insert into DimEmployee\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]"
+                  description="Input to the Balanced Data      Distributor Transformation"
+                  name="Balanced Data Distributor Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimEmployee\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 1"
+                  synchronousInputId="Package\Insert into DimEmployee\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into DimEmployee\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 2"
+                  synchronousInputId="Package\Insert into DimEmployee\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into DimEmployee\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 3]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 3"
+                  synchronousInputId="Package\Insert into DimEmployee\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into DimEmployee\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 4]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 4"
+                  synchronousInputId="Package\Insert into DimEmployee\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimEmployee\Get Data from Employees"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get Data from Employees"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+	EmployeeID AS EmployeeKey,
+	EmployeeID AS EmployeeIDBK,
+	CONCAT(FirstName, ' ',LastName) AS FullName,
+	Title,
+	TitleOfCourtesy AS Gender,
+	BirthDate,
+	HireDate,
+	City,
+	Region,
+	Country,
+	ReportsTo,
+	GETDATE() AS ETLTime
+FROM dbo.Employees</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimEmployee\Get Data from Employees.Connections[OleDbConnection]"
+                  connectionManagerID="{833AF120-CCE5-44A5-A52B-E08479ACAECC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Northwind]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[EmployeeKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeKey]"
+                      name="EmployeeKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeIDBK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[EmployeeIDBK]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeIDBK]"
+                      name="EmployeeIDBK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[FullName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[FullName]"
+                      length="31"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[FullName]"
+                      name="FullName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Title]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      length="30"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Title]"
+                      name="Title"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Gender]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      length="25"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Gender]"
+                      name="Gender"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[BirthDate]"
+                      name="BirthDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[HireDate]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[HireDate]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[HireDate]"
+                      name="HireDate"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[City]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      length="15"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[City]"
+                      name="City"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Region]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      length="15"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Region]"
+                      name="Region"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Country]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      length="15"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Country]"
+                      name="Country"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ReportsTo]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[ReportsTo]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ReportsTo]"
+                      name="ReportsTo"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ETLTime]"
+                      name="ETLTime"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[EmployeeIDBK]"
+                      dataType="i4"
+                      name="EmployeeIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[FullName]"
+                      dataType="wstr"
+                      length="31"
+                      name="FullName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="30"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="25"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[BirthDate]"
+                      dataType="dbTimeStamp"
+                      name="BirthDate" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[HireDate]"
+                      dataType="dbTimeStamp"
+                      name="HireDate" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="15"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="15"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="15"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[ReportsTo]"
+                      dataType="i4"
+                      name="ReportsTo" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[EmployeeKey]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[EmployeeKey]"
+                      name="EmployeeKey" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[EmployeeIDBK]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[EmployeeIDBK]"
+                      name="EmployeeIDBK" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[FullName]"
+                      dataType="wstr"
+                      length="31"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[FullName]"
+                      name="FullName" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      dataType="wstr"
+                      length="30"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[Title]"
+                      name="Title" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      dataType="wstr"
+                      length="25"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[Gender]"
+                      name="Gender" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[BirthDate]"
+                      name="BirthDate" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[HireDate]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[HireDate]"
+                      name="HireDate" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[City]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[City]"
+                      name="City" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[Region]"
+                      name="Region" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[Country]"
+                      name="Country" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[ReportsTo]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[ReportsTo]"
+                      name="ReportsTo" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[ETLTime]"
+                      name="ETLTime" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimEmployee\Insert into DimEmployee1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimEmployee1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimEmployee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[EmployeeKey]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeKey"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeKey]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[EmployeeIDBK]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeIDBK"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeIDBK]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeIDBK]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="31"
+                      cachedName="FullName"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[FullName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[Region]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[Country]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[ReportsTo]"
+                      cachedDataType="i4"
+                      cachedName="ReportsTo"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[ReportsTo]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ReportsTo]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[ETLTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ETLTime"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ETLTime]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[BirthDateKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].Columns[HireDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="HireDate"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[HireDateKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[HireDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeIDBK]"
+                      dataType="i4"
+                      name="EmployeeIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FullName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="50"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="30"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[BirthDateKey]"
+                      dataType="wstr"
+                      length="10"
+                      name="BirthDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[HireDateKey]"
+                      dataType="wstr"
+                      length="10"
+                      name="HireDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="15"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="15"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="15"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[ReportsTo]"
+                      dataType="i4"
+                      name="ReportsTo" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Insert into DimEmployee1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Insert into DimEmployee1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimEmployee\Insert into DimEmployee2"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimEmployee2"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimEmployee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[EmployeeKey]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeKey"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeKey]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[EmployeeIDBK]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeIDBK"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeIDBK]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeIDBK]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="31"
+                      cachedName="FullName"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[FullName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[Region]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[Country]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[ReportsTo]"
+                      cachedDataType="i4"
+                      cachedName="ReportsTo"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[ReportsTo]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ReportsTo]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[ETLTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ETLTime"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ETLTime]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[BirthDateKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].Columns[HireDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="HireDate"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[HireDateKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[HireDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeIDBK]"
+                      dataType="i4"
+                      name="EmployeeIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FullName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="50"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="30"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[BirthDateKey]"
+                      dataType="wstr"
+                      length="10"
+                      name="BirthDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[HireDateKey]"
+                      dataType="wstr"
+                      length="10"
+                      name="HireDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="15"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="15"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="15"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[ReportsTo]"
+                      dataType="i4"
+                      name="ReportsTo" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Insert into DimEmployee2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Insert into DimEmployee2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimEmployee\Insert into DimEmployee3"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimEmployee3"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimEmployee]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[EmployeeKey]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeKey"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeKey]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[EmployeeIDBK]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeIDBK"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeIDBK]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[EmployeeIDBK]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[FullName]"
+                      cachedDataType="wstr"
+                      cachedLength="31"
+                      cachedName="FullName"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[FullName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[Title]"
+                      cachedDataType="wstr"
+                      cachedLength="30"
+                      cachedName="Title"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Title]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[Gender]"
+                      cachedDataType="wstr"
+                      cachedLength="25"
+                      cachedName="Gender"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Gender]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[City]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="City"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[City]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[Region]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Region"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Region]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[Country]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="Country"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[Country]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[ReportsTo]"
+                      cachedDataType="i4"
+                      cachedName="ReportsTo"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[ReportsTo]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ReportsTo]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[ETLTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ETLTime"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[ETLTime]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[BirthDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="BirthDate"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[BirthDateKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[BirthDate]" />
+                    <inputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].Columns[HireDate]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="HireDate"
+                      externalMetadataColumnId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[HireDateKey]"
+                      lineageId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output].Columns[HireDate]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeIDBK]"
+                      dataType="i4"
+                      name="EmployeeIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[FullName]"
+                      dataType="wstr"
+                      length="50"
+                      name="FullName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[Title]"
+                      dataType="wstr"
+                      length="50"
+                      name="Title" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[Gender]"
+                      dataType="wstr"
+                      length="30"
+                      name="Gender" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[BirthDateKey]"
+                      dataType="wstr"
+                      length="10"
+                      name="BirthDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[HireDateKey]"
+                      dataType="wstr"
+                      length="10"
+                      name="HireDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[City]"
+                      dataType="wstr"
+                      length="15"
+                      name="City" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[Region]"
+                      dataType="wstr"
+                      length="15"
+                      name="Region" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[Country]"
+                      dataType="wstr"
+                      length="15"
+                      name="Country" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[ReportsTo]"
+                      dataType="i4"
+                      name="ReportsTo" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Insert into DimEmployee3.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimEmployee\Insert into DimEmployee3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimEmployee\Insert into DimEmployee3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Insert into DimEmployee.Paths[Balanced Data Distributor Output 1]"
+              endId="Package\Insert into DimEmployee\Insert into DimEmployee1.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 1"
+              startId="Package\Insert into DimEmployee\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 1]" />
+            <path
+              refId="Package\Insert into DimEmployee.Paths[Balanced Data Distributor Output 2]"
+              endId="Package\Insert into DimEmployee\Insert into DimEmployee2.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 2"
+              startId="Package\Insert into DimEmployee\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 2]" />
+            <path
+              refId="Package\Insert into DimEmployee.Paths[Balanced Data Distributor Output 3]"
+              endId="Package\Insert into DimEmployee\Insert into DimEmployee3.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 3"
+              startId="Package\Insert into DimEmployee\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 3]" />
+            <path
+              refId="Package\Insert into DimEmployee.Paths[OLE DB Source Output]"
+              endId="Package\Insert into DimEmployee\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]"
+              name="OLE DB Source Output"
+              startId="Package\Insert into DimEmployee\Get Data from Employees.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate DimEmployee"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{728AA42C-CD8B-41FD-9E93-5539CEC11C87}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate DimEmployee"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F7D2E82C-924C-4853-B425-3D99F6ED2440}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE DimEmployee" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{06CB9117-F7AA-4E3E-9C65-17E7CE13908F}"
+      DTS:From="Package\Truncate DimEmployee"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert into DimEmployee" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="188,41.6"
+          Id="Package\Truncate DimEmployee"
+          TopLeft="421.428572325682,35.9411764390844" />
+        <NodeLayout
+          Size="194.4,41.6"
+          Id="Package\Insert into DimEmployee"
+          TopLeft="420.714286609876,144.52941163802" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="516.671429467779,77.5411764390844">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.9882351989359"
+              Start="0,0"
+              End="0,59.4882351989359">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.4882351989359" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Insert into DimEmployee">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="199.2,41.6"
+          Id="Package\Insert into DimEmployee\Get Data from Employees"
+          TopLeft="396.428572272464,44.3529411375935" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Insert into DimEmployee\Balanced Data Distributor"
+          TopLeft="394.285715125045,142.999999874655" />
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\Insert into DimEmployee\Insert into DimEmployee1"
+          TopLeft="117.142857392224,231.705882149842" />
+        <EdgeLayout
+          Id="Package\Insert into DimEmployee.Paths[OLE DB Source Output]"
+          TopLeft="494.757143698755,85.9529411375935">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.0470587370614"
+              Start="0,0"
+              End="0,49.5470587370614">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,49.5470587370614" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Insert into DimEmployee.Paths[Balanced Data Distributor Output 1]"
+          TopLeft="445.885715125045,184.599999874655">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-228.342857732822,47.105882275187"
+              Start="0,0"
+              End="-228.342857732822,39.605882275187">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,12.1184583912444" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,12.1184583912444"
+                    Point2="0,16.1184583912444"
+                    Point3="-4,16.1184583912444" />
+                  <mssgle:LineSegment
+                    End="-224.342857732822,16.1184583912444" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-224.342857732822,16.1184583912444"
+                    Point2="-228.342857732822,16.1184583912444"
+                    Point3="-228.342857732822,20.1184583912444" />
+                  <mssgle:LineSegment
+                    End="-228.342857732822,39.605882275187" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-191.871995272661,21.1184583912444,155.4011328125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\Insert into DimEmployee\Insert into DimEmployee2"
+          TopLeft="397.857143704076,242.305882229607" />
+        <EdgeLayout
+          Id="Package\Insert into DimEmployee.Paths[Balanced Data Distributor Output 2]"
+          TopLeft="495.871429414561,184.599999874655">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,57.705882354952"
+              Start="0,0"
+              End="0,50.205882354952">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,50.205882354952" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-77.88611328125,19.298253677476,155.7722265625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="200.8,41.6"
+          Id="Package\Insert into DimEmployee\Insert into DimEmployee3"
+          TopLeft="690.714287184635,239.141176439084" />
+        <EdgeLayout
+          Id="Package\Insert into DimEmployee.Paths[Balanced Data Distributor Output 3]"
+          TopLeft="541.085715125045,184.599999874655">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="250.02857205959,54.5411765644293"
+              Start="0,0"
+              End="250.02857205959,47.0411765644293">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.6626307077225" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.6626307077225"
+                    Point2="0,18.6626307077225"
+                    Point3="4,18.6626307077225" />
+                  <mssgle:LineSegment
+                    End="246.02857205959,18.6626307077225" />
+                  <mssgle:CubicBezierSegment
+                    Point1="246.02857205959,18.6626307077225"
+                    Point2="250.02857205959,18.6626307077225"
+                    Point3="250.02857205959,22.6626307077225" />
+                  <mssgle:LineSegment
+                    End="250.02857205959,47.0411765644293" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="47.1916493110451,23.6626307077225,155.6452734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into DimEmployee\Get Data from Employees">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into DimEmployee\Insert into DimEmployee1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

@@ -1,0 +1,938 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/6/2025 11:20:30 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WWEX-HL390X2"
+  DTS:CreatorName="WWEX-HL390X2\Az.majidiiii"
+  DTS:DTSID="{219D82FF-AA68-480C-933C-078F05BC9DAE}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{64C74088-2755-4BE3-8AD8-D537AF279CF1}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert into DimShipGeography"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{C2EB7352-7CF9-4251-B453-7B9CB8E0BDC2}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert into DimShipGeography"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Insert into DimShipGeography\Balanced Data Distributor"
+              componentClassID="Microsoft.BDD"
+              contactInfo="Balanced Data Distributor;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Evaluates and directs rows in a dataset to multiple destinations."
+              name="Balanced Data Distributor">
+              <inputs>
+                <input
+                  refId="Package\Insert into DimShipGeography\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]"
+                  description="Input to the Balanced Data      Distributor Transformation"
+                  name="Balanced Data Distributor Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimShipGeography\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 1"
+                  synchronousInputId="Package\Insert into DimShipGeography\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into DimShipGeography\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 2"
+                  synchronousInputId="Package\Insert into DimShipGeography\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into DimShipGeography\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 3]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 3"
+                  synchronousInputId="Package\Insert into DimShipGeography\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into DimShipGeography\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 4]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 4"
+                  synchronousInputId="Package\Insert into DimShipGeography\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get Data from ShipGeography-Orders"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+	DISTINCT ShipCity AS ShipCity ,
+	ShipCountry,
+	GETDATE() AS ETLTime
+  FROM dbo.Orders</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Connections[OleDbConnection]"
+                  connectionManagerID="{833AF120-CCE5-44A5-A52B-E08479ACAECC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Northwind]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipCity]"
+                      length="15"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCity]"
+                      name="ShipCity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCountry]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipCountry]"
+                      length="15"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCountry]"
+                      name="ShipCountry"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ETLTime]"
+                      name="ETLTime"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipCity]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipCountry]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ShipCity]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ShipCity]"
+                      name="ShipCity" />
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ShipCountry]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ShipCountry]"
+                      name="ShipCountry" />
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ETLTime]"
+                      name="ETLTime" />
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimShipGeography1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimShipGeography]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].Columns[ShipCity]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ShipCity"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].ExternalColumns[ShipCity]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCity]" />
+                    <inputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].Columns[ShipCountry]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ShipCountry"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].ExternalColumns[ShipCountry]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCountry]" />
+                    <inputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].Columns[ETLTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ETLTime"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ETLTime]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].ExternalColumns[ShipGeographyKey]"
+                      dataType="i4"
+                      name="ShipGeographyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].ExternalColumns[ShipCity]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].ExternalColumns[ShipCountry]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimShipGeography2"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimShipGeography]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].Columns[ShipCity]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ShipCity"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].ExternalColumns[ShipCity]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCity]" />
+                    <inputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].Columns[ShipCountry]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ShipCountry"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].ExternalColumns[ShipCountry]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCountry]" />
+                    <inputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].Columns[ETLTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ETLTime"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ETLTime]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].ExternalColumns[ShipGeographyKey]"
+                      dataType="i4"
+                      name="ShipGeographyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].ExternalColumns[ShipCity]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].ExternalColumns[ShipCountry]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimShipGeography3"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimShipGeography]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].Columns[ShipCity]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ShipCity"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].ExternalColumns[ShipCity]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCity]" />
+                    <inputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].Columns[ShipCountry]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ShipCountry"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].ExternalColumns[ShipCountry]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ShipCountry]" />
+                    <inputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].Columns[ETLTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ETLTime"
+                      externalMetadataColumnId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output].Columns[ETLTime]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].ExternalColumns[ShipGeographyKey]"
+                      dataType="i4"
+                      name="ShipGeographyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].ExternalColumns[ShipCity]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].ExternalColumns[ShipCountry]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Insert into DimShipGeography.Paths[Balanced Data Distributor Output 1]"
+              endId="Package\Insert into DimShipGeography\Insert into DimShipGeography1.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 1"
+              startId="Package\Insert into DimShipGeography\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 1]" />
+            <path
+              refId="Package\Insert into DimShipGeography.Paths[Balanced Data Distributor Output 2]"
+              endId="Package\Insert into DimShipGeography\Insert into DimShipGeography2.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 2"
+              startId="Package\Insert into DimShipGeography\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 2]" />
+            <path
+              refId="Package\Insert into DimShipGeography.Paths[Balanced Data Distributor Output 3]"
+              endId="Package\Insert into DimShipGeography\Insert into DimShipGeography3.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 3"
+              startId="Package\Insert into DimShipGeography\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 3]" />
+            <path
+              refId="Package\Insert into DimShipGeography.Paths[OLE DB Source Output]"
+              endId="Package\Insert into DimShipGeography\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]"
+              name="OLE DB Source Output"
+              startId="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate DimShipGeography"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{E2F8DF36-E45C-4D12-8224-CB7DEA79FE27}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate DimShipGeography"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F7D2E82C-924C-4853-B425-3D99F6ED2440}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE DimShipGeography" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{BD2C4D35-915B-47CB-BDFB-4D57093B894C}"
+      DTS:From="Package\Truncate DimShipGeography"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert into DimShipGeography" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="213.6,41.6"
+          Id="Package\Truncate DimShipGeography"
+          TopLeft="406.428572293751,25.99999997721" />
+        <NodeLayout
+          Size="220,41.6"
+          Id="Package\Insert into DimShipGeography"
+          TopLeft="407.142858009558,133.058823412781" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="515.185715151654,67.59999997721">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,65.4588234355705"
+              Start="0,0"
+              End="0,57.9588234355705">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,57.9588234355705" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Insert into DimShipGeography">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="255.2,41.6"
+          Id="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders"
+          TopLeft="379.285715093114,28.2941176222579" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Insert into DimShipGeography\Balanced Data Distributor"
+          TopLeft="407.857143725364,158.294117508308" />
+        <NodeLayout
+          Size="226.4,41.6"
+          Id="Package\Insert into DimShipGeography\Insert into DimShipGeography1"
+          TopLeft="156.428571761567,253.117646836956" />
+        <EdgeLayout
+          Id="Package\Insert into DimShipGeography.Paths[OLE DB Source Output]"
+          TopLeft="506.971429409239,69.8941176222579">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,88.39999988605"
+              Start="0,0"
+              End="0,80.89999988605">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,80.89999988605" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Insert into DimShipGeography.Paths[Balanced Data Distributor Output 1]"
+          TopLeft="507.057143725364,199.894117508308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-237.428571963797,53.2235293286483"
+              Start="0,0"
+              End="-237.428571963797,45.7235293286483">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.6117646643241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.6117646643241"
+                    Point2="0,26.6117646643241"
+                    Point3="-4,26.6117646643241" />
+                  <mssgle:LineSegment
+                    End="-233.428571963797,26.6117646643241" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-233.428571963797,26.6117646643241"
+                    Point2="-237.428571963797,26.6117646643241"
+                    Point3="-237.428571963797,30.6117646643241" />
+                  <mssgle:LineSegment
+                    End="-237.428571963797,45.7235293286483" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-196.414852388148,31.6117646643241,155.4011328125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="226.4,41.6"
+          Id="Package\Insert into DimShipGeography\Insert into DimShipGeography2"
+          TopLeft="442.85714379987,253.011764573164" />
+        <EdgeLayout
+          Id="Package\Insert into DimShipGeography.Paths[Balanced Data Distributor Output 2]"
+          TopLeft="538.790477058697,199.894117508308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="17.2666667411726,53.1176470648563"
+              Start="0,0"
+              End="17.2666667411726,45.6176470648563">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,17.5020235318538" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,17.5020235318538"
+                    Point2="0,21.5020235318538"
+                    Point3="4,21.5020235318538" />
+                  <mssgle:LineSegment
+                    End="13.2666667411726,21.5020235318538" />
+                  <mssgle:CubicBezierSegment
+                    Point1="13.2666667411726,21.5020235318538"
+                    Point2="17.2666667411726,21.5020235318538"
+                    Point3="17.2666667411726,25.5020235318538" />
+                  <mssgle:LineSegment
+                    End="17.2666667411726,45.6176470648563" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-69.2527799106637,26.5020235318538,155.7722265625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="226.4,41.6"
+          Id="Package\Insert into DimShipGeography\Insert into DimShipGeography3"
+          TopLeft="702.142858637535,250.717646928116" />
+        <EdgeLayout
+          Id="Package\Insert into DimShipGeography.Paths[Balanced Data Distributor Output 3]"
+          TopLeft="554.657143725364,199.894117508308">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="260.685714912171,50.8235294198084"
+              Start="0,0"
+              End="260.685714912171,43.3235294198084">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,13.3905445494835" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,13.3905445494835"
+                    Point2="0,17.3905445494835"
+                    Point3="4,17.3905445494835" />
+                  <mssgle:LineSegment
+                    End="256.685714912171,17.3905445494835" />
+                  <mssgle:CubicBezierSegment
+                    Point1="256.685714912171,17.3905445494835"
+                    Point2="260.685714912171,17.3905445494835"
+                    Point3="260.685714912171,21.3905445494835" />
+                  <mssgle:LineSegment
+                    End="260.685714912171,43.3235294198084" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="52.5202207373356,22.3905445494835,155.6452734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into DimShipGeography\Get Data from ShipGeography-Orders">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into DimShipGeography\Insert into DimShipGeography1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

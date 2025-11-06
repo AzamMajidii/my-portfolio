@@ -1,0 +1,2068 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/6/2025 11:20:30 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WWEX-HL390X2"
+  DTS:CreatorName="WWEX-HL390X2\Az.majidiiii"
+  DTS:DTSID="{DC7D89B6-2557-4402-969B-01E2183B2136}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="6"
+  DTS:VersionGUID="{5CE98F0A-66BE-47BF-9D65-CABDD355C951}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert into FactOrder"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{20495EE8-48D0-4808-B47A-FCE69BFCAF34}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert into FactOrder"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Insert into FactOrder\Balanced Data Distributor"
+              componentClassID="Microsoft.BDD"
+              contactInfo="Balanced Data Distributor;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Evaluates and directs rows in a dataset to multiple destinations."
+              name="Balanced Data Distributor">
+              <inputs>
+                <input
+                  refId="Package\Insert into FactOrder\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]"
+                  description="Input to the Balanced Data      Distributor Transformation"
+                  name="Balanced Data Distributor Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into FactOrder\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 1"
+                  synchronousInputId="Package\Insert into FactOrder\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into FactOrder\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 2"
+                  synchronousInputId="Package\Insert into FactOrder\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into FactOrder\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 3]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 3"
+                  synchronousInputId="Package\Insert into FactOrder\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into FactOrder\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 4]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 4"
+                  synchronousInputId="Package\Insert into FactOrder\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into FactOrder\Get Data from Orders"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get Data from Orders"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT 
+	Orders.OrderID AS OrderIDBK,
+	Orders.CustomerID,
+	Orders.EmployeeID AS EmployeeKey,
+	FORMAT(Orders.OrderDate,'yyyMMdd') AS OrderDateKey,
+	FORMAT(Orders.RequiredDate,'yyyMMdd') AS RequiredDateKey,
+	FORMAT(Orders.ShippedDate,'yyyMMdd') AS ShippedDateKey,
+	Orders.ShipVia AS ShipperKey,
+	Orders.ShipName,
+	Orders.ShipAddress,
+	Orders.ShipCity,
+	Orders.ShipPostalCode,
+	Orders.ShipCountry,
+	OrderDetails.ProductID AS ProductKey,
+	Orders.Freight,
+	OrderDetails.UnitPrice,
+	OrderDetails.Quantity,
+	OrderDetails.Discount, 
+	GETDATE() AS ETLTime
+FROM dbo.Orders
+LEFT JOIN dbo.[Order Details] AS OrderDetails ON
+	OrderDetails.OrderID = Orders.OrderID;</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into FactOrder\Get Data from Orders.Connections[OleDbConnection]"
+                  connectionManagerID="{833AF120-CCE5-44A5-A52B-E08479ACAECC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Northwind]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderIDBK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[OrderIDBK]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderIDBK]"
+                      name="OrderIDBK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                      length="5"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[CustomerID]"
+                      name="CustomerID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[EmployeeKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[EmployeeKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[EmployeeKey]"
+                      name="EmployeeKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderDateKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[OrderDateKey]"
+                      length="4000"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderDateKey]"
+                      name="OrderDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[RequiredDateKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[RequiredDateKey]"
+                      length="4000"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[RequiredDateKey]"
+                      name="RequiredDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShippedDateKey]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShippedDateKey]"
+                      length="4000"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShippedDateKey]"
+                      name="ShippedDateKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipperKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipperKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipperKey]"
+                      name="ShipperKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipName]"
+                      length="40"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipName]"
+                      name="ShipName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipAddress]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipAddress]"
+                      length="60"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipAddress]"
+                      name="ShipAddress"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipCity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipCity]"
+                      length="15"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipCity]"
+                      name="ShipCity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipPostalCode]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipPostalCode]"
+                      length="10"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipPostalCode]"
+                      name="ShipPostalCode"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipCountry]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipCountry]"
+                      length="15"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipCountry]"
+                      name="ShipCountry"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Freight]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[Freight]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Freight]"
+                      name="Freight"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[UnitPrice]"
+                      name="UnitPrice"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Quantity]"
+                      dataType="i2"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Quantity]"
+                      name="Quantity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Discount]"
+                      dataType="r4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[Discount]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Discount]"
+                      name="Discount"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ETLTime]"
+                      name="ETLTime"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[OrderIDBK]"
+                      dataType="i4"
+                      name="OrderIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[CustomerID]"
+                      dataType="wstr"
+                      length="5"
+                      name="CustomerID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[OrderDateKey]"
+                      dataType="wstr"
+                      length="4000"
+                      name="OrderDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[RequiredDateKey]"
+                      dataType="wstr"
+                      length="4000"
+                      name="RequiredDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShippedDateKey]"
+                      dataType="wstr"
+                      length="4000"
+                      name="ShippedDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipperKey]"
+                      dataType="i4"
+                      name="ShipperKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipName]"
+                      dataType="wstr"
+                      length="40"
+                      name="ShipName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipAddress]"
+                      dataType="wstr"
+                      length="60"
+                      name="ShipAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipCity]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipPostalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="ShipPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ShipCountry]"
+                      dataType="wstr"
+                      length="15"
+                      name="ShipCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[Freight]"
+                      dataType="cy"
+                      name="Freight" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[Discount]"
+                      dataType="r4"
+                      name="Discount" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[OrderIDBK]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[OrderIDBK]"
+                      name="OrderIDBK" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                      dataType="wstr"
+                      length="5"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[CustomerID]"
+                      name="CustomerID" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[EmployeeKey]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[EmployeeKey]"
+                      name="EmployeeKey" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[OrderDateKey]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[OrderDateKey]"
+                      name="OrderDateKey" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[RequiredDateKey]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[RequiredDateKey]"
+                      name="RequiredDateKey" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShippedDateKey]"
+                      dataType="wstr"
+                      length="4000"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShippedDateKey]"
+                      name="ShippedDateKey" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipperKey]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipperKey]"
+                      name="ShipperKey" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipName]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipName]"
+                      name="ShipName" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipAddress]"
+                      dataType="wstr"
+                      length="60"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipAddress]"
+                      name="ShipAddress" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipCity]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipCity]"
+                      name="ShipCity" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipPostalCode]"
+                      dataType="wstr"
+                      length="10"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipPostalCode]"
+                      name="ShipPostalCode" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipCountry]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ShipCountry]"
+                      name="ShipCountry" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      name="ProductKey" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[Freight]"
+                      dataType="cy"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[Freight]"
+                      name="Freight" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      dataType="cy"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[UnitPrice]"
+                      name="UnitPrice" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      dataType="i2"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[Quantity]"
+                      name="Quantity" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[Discount]"
+                      dataType="r4"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[Discount]"
+                      name="Discount" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ETLTime]"
+                      name="ETLTime" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into FactOrder\Insert into FactOrder1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into FactOrder1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactOrder]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into FactOrder\Insert into FactOrder1.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[OrderIDBK]"
+                      cachedDataType="i4"
+                      cachedName="OrderIDBK"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[OrderIDBK]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderIDBK]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[EmployeeKey]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[EmployeeKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[OrderDateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="OrderDateKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderDateKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[RequiredDateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="RequiredDateKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[RequiredDateKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[RequiredDateKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[ShippedDateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="ShippedDateKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShippedDateKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShippedDateKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[ShipperKey]"
+                      cachedDataType="i4"
+                      cachedName="ShipperKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShipperKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipperKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[ShipAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="ShipAddress"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShipAddress]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipAddress]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[ShipPostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ShipPostalCode"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShipPostalCode]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipPostalCode]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[Freight]"
+                      cachedDataType="cy"
+                      cachedName="Freight"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[Freight]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Freight]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[Discount]"
+                      cachedDataType="r4"
+                      cachedName="Discount"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Discount]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Match Output].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].Columns[ShipGeographyKey]"
+                      cachedDataType="i4"
+                      cachedName="ShipGeographyKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShipGeographyKey]"
+                      lineageId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Match Output].Columns[ShipGeographyKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[OrderKey]"
+                      dataType="i4"
+                      name="OrderKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[OrderIDBK]"
+                      dataType="i4"
+                      name="OrderIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      dataType="i4"
+                      name="OrderDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[RequiredDateKey]"
+                      dataType="i4"
+                      name="RequiredDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShippedDateKey]"
+                      dataType="i4"
+                      name="ShippedDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShipperKey]"
+                      dataType="i4"
+                      name="ShipperKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShipGeographyKey]"
+                      dataType="i4"
+                      name="ShipGeographyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShipAddress]"
+                      dataType="wstr"
+                      length="60"
+                      name="ShipAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[ShipPostalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="ShipPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[Freight]"
+                      dataType="cy"
+                      name="Freight" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                      dataType="numeric"
+                      name="Discount"
+                      precision="5"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into FactOrder\Insert into FactOrder1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Insert into FactOrder1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Insert into FactOrder1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into FactOrder\Insert into FactOrder2"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into FactOrder2"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactOrder]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into FactOrder\Insert into FactOrder2.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[OrderIDBK]"
+                      cachedDataType="i4"
+                      cachedName="OrderIDBK"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[OrderIDBK]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderIDBK]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[EmployeeKey]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[EmployeeKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[OrderDateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="OrderDateKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderDateKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[RequiredDateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="RequiredDateKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[RequiredDateKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[RequiredDateKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[ShippedDateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="ShippedDateKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShippedDateKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShippedDateKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[ShipperKey]"
+                      cachedDataType="i4"
+                      cachedName="ShipperKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShipperKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipperKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[ShipAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="ShipAddress"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShipAddress]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipAddress]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[ShipPostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ShipPostalCode"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShipPostalCode]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipPostalCode]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[Freight]"
+                      cachedDataType="cy"
+                      cachedName="Freight"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[Freight]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Freight]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[Discount]"
+                      cachedDataType="r4"
+                      cachedName="Discount"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Discount]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Match Output].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].Columns[ShipGeographyKey]"
+                      cachedDataType="i4"
+                      cachedName="ShipGeographyKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShipGeographyKey]"
+                      lineageId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Match Output].Columns[ShipGeographyKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[OrderKey]"
+                      dataType="i4"
+                      name="OrderKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[OrderIDBK]"
+                      dataType="i4"
+                      name="OrderIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      dataType="i4"
+                      name="OrderDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[RequiredDateKey]"
+                      dataType="i4"
+                      name="RequiredDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShippedDateKey]"
+                      dataType="i4"
+                      name="ShippedDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShipperKey]"
+                      dataType="i4"
+                      name="ShipperKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShipGeographyKey]"
+                      dataType="i4"
+                      name="ShipGeographyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShipAddress]"
+                      dataType="wstr"
+                      length="60"
+                      name="ShipAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[ShipPostalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="ShipPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[Freight]"
+                      dataType="cy"
+                      name="Freight" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                      dataType="numeric"
+                      name="Discount"
+                      precision="5"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into FactOrder\Insert into FactOrder2.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Insert into FactOrder2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Insert into FactOrder2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into FactOrder\Insert into FactOrder3"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into FactOrder3"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[FactOrder]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into FactOrder\Insert into FactOrder3.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[OrderIDBK]"
+                      cachedDataType="i4"
+                      cachedName="OrderIDBK"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[OrderIDBK]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderIDBK]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[EmployeeKey]"
+                      cachedDataType="i4"
+                      cachedName="EmployeeKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[EmployeeKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[OrderDateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="OrderDateKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[OrderDateKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[RequiredDateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="RequiredDateKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[RequiredDateKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[RequiredDateKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[ShippedDateKey]"
+                      cachedDataType="wstr"
+                      cachedLength="4000"
+                      cachedName="ShippedDateKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShippedDateKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShippedDateKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[ShipperKey]"
+                      cachedDataType="i4"
+                      cachedName="ShipperKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShipperKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipperKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[ShipAddress]"
+                      cachedDataType="wstr"
+                      cachedLength="60"
+                      cachedName="ShipAddress"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShipAddress]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipAddress]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[ShipPostalCode]"
+                      cachedDataType="wstr"
+                      cachedLength="10"
+                      cachedName="ShipPostalCode"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShipPostalCode]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipPostalCode]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[Freight]"
+                      cachedDataType="cy"
+                      cachedName="Freight"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[Freight]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Freight]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[UnitPrice]"
+                      cachedDataType="cy"
+                      cachedName="UnitPrice"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[UnitPrice]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[Quantity]"
+                      cachedDataType="i2"
+                      cachedName="Quantity"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Quantity]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[Discount]"
+                      cachedDataType="r4"
+                      cachedName="Discount"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[Discount]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[CustomerKey]"
+                      cachedDataType="i4"
+                      cachedName="CustomerKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      lineageId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Match Output].Columns[CustomerKey]" />
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].Columns[ShipGeographyKey]"
+                      cachedDataType="i4"
+                      cachedName="ShipGeographyKey"
+                      externalMetadataColumnId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShipGeographyKey]"
+                      lineageId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Match Output].Columns[ShipGeographyKey]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[OrderKey]"
+                      dataType="i4"
+                      name="OrderKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[OrderIDBK]"
+                      dataType="i4"
+                      name="OrderIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[CustomerKey]"
+                      dataType="i4"
+                      name="CustomerKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[EmployeeKey]"
+                      dataType="i4"
+                      name="EmployeeKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[OrderDateKey]"
+                      dataType="i4"
+                      name="OrderDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[RequiredDateKey]"
+                      dataType="i4"
+                      name="RequiredDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShippedDateKey]"
+                      dataType="i4"
+                      name="ShippedDateKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShipperKey]"
+                      dataType="i4"
+                      name="ShipperKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShipGeographyKey]"
+                      dataType="i4"
+                      name="ShipGeographyKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShipAddress]"
+                      dataType="wstr"
+                      length="60"
+                      name="ShipAddress" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[ShipPostalCode]"
+                      dataType="wstr"
+                      length="10"
+                      name="ShipPostalCode" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[Freight]"
+                      dataType="cy"
+                      name="Freight" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[UnitPrice]"
+                      dataType="cy"
+                      name="UnitPrice" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[Quantity]"
+                      dataType="i2"
+                      name="Quantity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input].ExternalColumns[Discount]"
+                      dataType="numeric"
+                      name="Discount"
+                      precision="5"
+                      scale="2" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into FactOrder\Insert into FactOrder3.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Insert into FactOrder3.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Insert into FactOrder3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Insert into FactOrder3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into FactOrder\Lookup_CustomerKey"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup_CustomerKey"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimCustomer]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimCustomer]) [refTable]
+where [refTable].[CustomerIDBK] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="CustomerKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerIDBK" dataType="DT_WSTR" length="5" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerCompanyName" dataType="DT_WSTR" length="50" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerCity" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerRegion" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="CustomerCountry" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ETLTime" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[CustomerID]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into FactOrder\Lookup_CustomerKey.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into FactOrder\Lookup_CustomerKey.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Lookup_CustomerKey.Inputs[Lookup Input].Columns[CustomerID]"
+                      cachedDataType="wstr"
+                      cachedLength="5"
+                      cachedName="CustomerID"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[CustomerID]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">CustomerIDBK</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Insert into FactOrder\Lookup_CustomerKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Match Output].Columns[CustomerKey]"
+                      name="CustomerKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">CustomerKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Insert into FactOrder\Lookup_CustomerKey.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Insert into FactOrder\Lookup_CustomerKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey"
+              componentClassID="Microsoft.Lookup"
+              contactInfo="Lookup;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;6"
+              description="Joins additional columns to the data flow by looking up values in a table. For example, join to the 'employee id' column the employees table to get 'hire date' and 'employee name'. We recommend this transformation when the lookup table can fit into memory."
+              name="Lookup_ShipGeographyKey"
+              usesDispositions="true"
+              version="6">
+              <properties>
+                <property
+                  dataType="System.String"
+                  description="Specifies the SQL statement that generates the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from [dbo].[DimShipGeography]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies a SQL statement that uses parameters to generate the lookup table."
+                  expressionType="Notify"
+                  name="SqlCommandParam"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">select * from (select * from [dbo].[DimShipGeography]) [refTable]
+where [refTable].[ShipCity] = ? and [refTable].[ShipCountry] = ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the type of connection used to access the reference dataset."
+                  name="ConnectionType"
+                  typeConverter="LookupConnectionType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the cache type of the lookup table."
+                  name="CacheType"
+                  typeConverter="CacheType">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies how the Lookup transformation handles rows without matching entries in the reference data set."
+                  name="NoMatchBehavior"
+                  typeConverter="LookupNoMatchBehavior">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the percentage of the cache that is allocated for rows with no matching entries in the reference dataset."
+                  name="NoMatchCachePercentage">0</property>
+                <property
+                  dataType="System.Int32"
+                  description="Maximum Memory Usage for Reference Cache on a 32 bit platform."
+                  name="MaxMemoryUsage">25</property>
+                <property
+                  dataType="System.Int64"
+                  description="Maximum Memory Usage for Reference Cache on a 64 bit platform."
+                  name="MaxMemoryUsage64">25</property>
+                <property
+                  dataType="System.String"
+                  description="Indicates whether to reference metadata in an XML format."
+                  name="ReferenceMetadataXml">&lt;referenceMetadata&gt;&lt;referenceColumns&gt;&lt;referenceColumn name="ShipGeographyKey" dataType="DT_I4" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ShipCity" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ShipCountry" dataType="DT_WSTR" length="15" precision="0" scale="0" codePage="0"/&gt;&lt;referenceColumn name="ETLTime" dataType="DT_DBTIMESTAMP" length="0" precision="0" scale="0" codePage="0"/&gt;&lt;/referenceColumns&gt;&lt;/referenceMetadata&gt;</property>
+                <property
+                  containsID="true"
+                  dataType="System.String"
+                  description="Specifies the list of lineage identifiers that map to the parameters that the SQL statement in the SQLCommand property uses. Entries in the list are separated by semicolons."
+                  name="ParameterMap">#{Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipCity]};#{Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipCountry]};</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Determines whether duplicate keys in the reference data should be treated as errors when full cache mode is used."
+                  name="TreatDuplicateKeysAsError">false</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="Connection manager used to access lookup data."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Inputs[Lookup Input]"
+                  name="Lookup Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Inputs[Lookup Input].Columns[ShipCity]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ShipCity"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipCity]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ShipCity</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                    <inputColumn
+                      refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Inputs[Lookup Input].Columns[ShipCountry]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ShipCountry"
+                      lineageId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output].Columns[ShipCountry]">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table that a column joins."
+                          name="JoinToReferenceColumn">ShipCountry</property>
+                        <property
+                          dataType="System.Null"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn" />
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Match Output]"
+                  errorOrTruncationOperation="Lookup"
+                  errorRowDisposition="IgnoreFailure"
+                  exclusionGroup="1"
+                  name="Lookup Match Output"
+                  synchronousInputId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Match Output].Columns[ShipGeographyKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Copy Column"
+                      lineageId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Match Output].Columns[ShipGeographyKey]"
+                      name="ShipGeographyKey"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.String"
+                          description="Specifies the column in the reference table from which a column is copied."
+                          name="CopyFromReferenceColumn">ShipGeographyKey</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup No Match Output]"
+                  description="The Lookup output that handles rows with no matching entries in the reference dataset. Use this output when the NoMatchBehavior property is set to &quot;Send rows with no matching entries to the no match output.&quot;"
+                  exclusionGroup="1"
+                  name="Lookup No Match Output"
+                  synchronousInputId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Inputs[Lookup Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="Lookup Error Output"
+                  synchronousInputId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Inputs[Lookup Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Insert into FactOrder.Paths[Balanced Data Distributor Output 1]"
+              endId="Package\Insert into FactOrder\Insert into FactOrder1.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 1"
+              startId="Package\Insert into FactOrder\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 1]" />
+            <path
+              refId="Package\Insert into FactOrder.Paths[Balanced Data Distributor Output 2]"
+              endId="Package\Insert into FactOrder\Insert into FactOrder2.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 2"
+              startId="Package\Insert into FactOrder\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 2]" />
+            <path
+              refId="Package\Insert into FactOrder.Paths[Balanced Data Distributor Output 3]"
+              endId="Package\Insert into FactOrder\Insert into FactOrder3.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 3"
+              startId="Package\Insert into FactOrder\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 3]" />
+            <path
+              refId="Package\Insert into FactOrder.Paths[Lookup Match Output]"
+              endId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Inputs[Lookup Input]"
+              name="Lookup Match Output"
+              startId="Package\Insert into FactOrder\Lookup_CustomerKey.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Insert into FactOrder.Paths[Lookup Match Output1]"
+              endId="Package\Insert into FactOrder\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]"
+              name="Lookup Match Output"
+              startId="Package\Insert into FactOrder\Lookup_ShipGeographyKey.Outputs[Lookup Match Output]" />
+            <path
+              refId="Package\Insert into FactOrder.Paths[OLE DB Source Output]"
+              endId="Package\Insert into FactOrder\Lookup_CustomerKey.Inputs[Lookup Input]"
+              name="OLE DB Source Output"
+              startId="Package\Insert into FactOrder\Get Data from Orders.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate FactOrder"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{B800E1E5-7657-451B-BCAB-2F17926091C5}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate FactOrder"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F7D2E82C-924C-4853-B425-3D99F6ED2440}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE FactOrder" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C20BF88A-ADCE-43E5-ACB2-C7AF5B3F9EB4}"
+      DTS:From="Package\Truncate FactOrder"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert into FactOrder" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="169.6,41.6"
+          Id="Package\Truncate FactOrder"
+          TopLeft="387.857143682789,22.1764705687968" />
+        <NodeLayout
+          Size="176.8,41.6"
+          Id="Package\Insert into FactOrder"
+          TopLeft="378.571429377308,136.882352821194" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="469.814286530049,63.7764705687968">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,73.105882252397"
+              Start="0,0"
+              End="0,65.605882252397">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,65.605882252397" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Insert into FactOrder">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\Insert into FactOrder\Get Data from Orders"
+          TopLeft="387.142857966983,23.7058823321621" />
+        <NodeLayout
+          Size="180,41.6"
+          Id="Package\Insert into FactOrder\Lookup_CustomerKey"
+          TopLeft="392.142857977626,106.294117553888" />
+        <NodeLayout
+          Size="206.4,41.6"
+          Id="Package\Insert into FactOrder\Lookup_ShipGeographyKey"
+          TopLeft="375.714286514083,196.52941159244" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Insert into FactOrder\Balanced Data Distributor"
+          TopLeft="368.57142935602,275.294117405753" />
+        <NodeLayout
+          Size="182.4,41.6"
+          Id="Package\Insert into FactOrder\Insert into FactOrder1"
+          TopLeft="151.428571750923,383.658823219066" />
+        <EdgeLayout
+          Id="Package\Insert into FactOrder.Paths[OLE DB Source Output]"
+          TopLeft="479.642857972304,65.3058823321621">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,40.9882352217259"
+              Start="0,0"
+              End="0,33.4882352217259">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.4882352217259" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Insert into FactOrder.Paths[Lookup Match Output]"
+          TopLeft="480.528572245855,147.894117553888">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,48.6352940385522"
+              Start="0,0"
+              End="0,41.1352940385522">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,41.1352940385522" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-48.19138671875,14.7629595192761,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Insert into FactOrder.Paths[Lookup Match Output1]"
+          TopLeft="478.914286514083,238.12941159244">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-11.1428571580624,37.1647058133127"
+              Start="0,0"
+              End="-11.1428571580624,29.6647058133127">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14.5823529066564" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14.5823529066564"
+                    Point2="0,18.5823529066564"
+                    Point3="-4,18.5823529066564" />
+                  <mssgle:LineSegment
+                    End="-7.14285715806238,18.5823529066564" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-7.14285715806238,18.5823529066564"
+                    Point2="-11.1428571580624,18.5823529066564"
+                    Point3="-11.1428571580624,22.5823529066564" />
+                  <mssgle:LineSegment
+                    End="-11.1428571580624,29.6647058133127" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-53.7628152977812,23.5823529066564,96.3827734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Insert into FactOrder.Paths[Balanced Data Distributor Output 1]"
+          TopLeft="420.17142935602,316.894117405753">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-177.542857605097,66.7647058133127"
+              Start="0,0"
+              End="-177.542857605097,59.2647058133127">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.845217639038" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.845217639038"
+                    Point2="0,22.845217639038"
+                    Point3="-4,22.845217639038" />
+                  <mssgle:LineSegment
+                    End="-173.542857605097,22.845217639038" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-173.542857605097,22.845217639038"
+                    Point2="-177.542857605097,22.845217639038"
+                    Point3="-177.542857605097,26.845217639038" />
+                  <mssgle:LineSegment
+                    End="-177.542857605097,59.2647058133127" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-166.471995208799,27.845217639038,155.4011328125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="182.4,41.6"
+          Id="Package\Insert into FactOrder\Insert into FactOrder2"
+          TopLeft="384.285715103758,380.494117428543" />
+        <EdgeLayout
+          Id="Package\Insert into FactOrder.Paths[Balanced Data Distributor Output 2]"
+          TopLeft="471.628572229889,316.894117405753">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,63.6000000227899"
+              Start="0,0"
+              End="0,56.1000000227899">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,56.1000000227899" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-77.88611328125,22.245312511395,155.7722265625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="182.4,41.6"
+          Id="Package\Insert into FactOrder\Insert into FactOrder3"
+          TopLeft="610.00000129853,376.67058802013" />
+        <EdgeLayout
+          Id="Package\Insert into FactOrder.Paths[Balanced Data Distributor Output 3]"
+          TopLeft="515.37142935602,316.894117405753">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="185.82857194251,59.7764706143767"
+              Start="0,0"
+              End="185.82857194251,52.2764706143767">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.4540177964313" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.4540177964313"
+                    Point2="0,20.4540177964313"
+                    Point3="4,20.4540177964313" />
+                  <mssgle:LineSegment
+                    End="181.82857194251,20.4540177964313" />
+                  <mssgle:CubicBezierSegment
+                    Point1="181.82857194251,20.4540177964313"
+                    Point2="185.82857194251,20.4540177964313"
+                    Point3="185.82857194251,24.4540177964313" />
+                  <mssgle:LineSegment
+                    End="185.82857194251,52.2764706143767" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="15.0916492525048,25.4540177964313,155.6452734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into FactOrder\Get Data from Orders">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into FactOrder\Lookup_CustomerKey">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimCustomer]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into FactOrder\Lookup_ShipGeographyKey">
+    <Properties>
+      <Property>
+        <Name>OverwriteParamsSQLProp</Name>
+        <Value
+          type="q2:boolean">false</Value>
+      </Property>
+      <Property>
+        <Name>UsedTableName</Name>
+        <Value
+          type="q3:string">[dbo].[DimShipGeography]</Value>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q4:int">0</Value>
+      </Property>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into FactOrder\Insert into FactOrder1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

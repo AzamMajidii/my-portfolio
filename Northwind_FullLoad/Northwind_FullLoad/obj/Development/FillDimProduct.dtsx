@@ -1,0 +1,1370 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="11/6/2025 11:20:30 AM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="WWEX-HL390X2"
+  DTS:CreatorName="WWEX-HL390X2\Az.majidiiii"
+  DTS:DTSID="{EB263869-9A69-4B74-B95A-C97A21BD2B28}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="16.0.5685.2"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionBuild="2"
+  DTS:VersionGUID="{9E71D99D-F028-4B9B-AE79-B8A92D2813E9}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Insert into DimProduct"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{29E54DF3-750F-4029-BF15-71177C00495F}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert into DimProduct"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Insert into DimProduct\Balanced Data Distributor"
+              componentClassID="Microsoft.BDD"
+              contactInfo="Balanced Data Distributor;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Evaluates and directs rows in a dataset to multiple destinations."
+              name="Balanced Data Distributor">
+              <inputs>
+                <input
+                  refId="Package\Insert into DimProduct\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]"
+                  description="Input to the Balanced Data      Distributor Transformation"
+                  name="Balanced Data Distributor Input">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimProduct\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 1"
+                  synchronousInputId="Package\Insert into DimProduct\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into DimProduct\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 2"
+                  synchronousInputId="Package\Insert into DimProduct\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into DimProduct\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 3]"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 3"
+                  synchronousInputId="Package\Insert into DimProduct\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\Insert into DimProduct\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 4]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  exclusionGroup="1"
+                  name="Balanced Data Distributor Output 4"
+                  synchronousInputId="Package\Insert into DimProduct\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimProduct\Get Data from Products"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="Get Data from Products"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">SELECT
+	Products.ProductID AS ProductKey,
+	Products.ProductID AS ProductIDBK,
+	Products.ProductName,
+	Suppliers.SupplierID,
+	Suppliers.CompanyName AS SupplierCompanyName,
+	Suppliers.City AS SupplierCity,
+	Suppliers.Region AS SupplierRegion,
+	Suppliers.Country AS SupplierCountry,
+	Categories.CategoryID AS CategoryID,
+	Categories.CategoryName AS ProductCategoryName,
+	GETDATE() AS ETLTime
+FROM dbo.Products
+LEFT JOIN dbo.Suppliers ON
+	Suppliers.SupplierID = Products.SupplierID
+LEFT JOIN dbo.Categories ON
+	Categories.CategoryID = Products.CategoryID</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimProduct\Get Data from Products.Connections[OleDbConnection]"
+                  connectionManagerID="{833AF120-CCE5-44A5-A52B-E08479ACAECC}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[Northwind]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductKey]"
+                      name="ProductKey"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductIDBK]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ProductIDBK]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductIDBK]"
+                      name="ProductIDBK"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ProductName]"
+                      length="40"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductName]"
+                      name="ProductName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierID]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierID]"
+                      name="SupplierID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCompanyName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierCompanyName]"
+                      length="40"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCompanyName]"
+                      name="SupplierCompanyName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCity]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierCity]"
+                      length="15"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCity]"
+                      name="SupplierCity"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierRegion]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierRegion]"
+                      length="15"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierRegion]"
+                      name="SupplierRegion"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCountry]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierCountry]"
+                      length="15"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCountry]"
+                      name="SupplierCountry"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[CategoryID]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[CategoryID]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[CategoryID]"
+                      name="CategoryID"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductCategoryName]"
+                      dataType="wstr"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ProductCategoryName]"
+                      length="15"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductCategoryName]"
+                      name="ProductCategoryName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ETLTime]"
+                      name="ETLTime"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ProductIDBK]"
+                      dataType="i4"
+                      name="ProductIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierID]"
+                      dataType="i4"
+                      name="SupplierID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierCompanyName]"
+                      dataType="wstr"
+                      length="40"
+                      name="SupplierCompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierCity]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierCity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierRegion]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierRegion" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[SupplierCountry]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[CategoryID]"
+                      dataType="i4"
+                      name="CategoryID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ProductCategoryName]"
+                      dataType="wstr"
+                      length="15"
+                      name="ProductCategoryName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ProductKey]"
+                      name="ProductKey" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ProductIDBK]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ProductIDBK]"
+                      name="ProductIDBK" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ProductName]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ProductName]"
+                      name="ProductName" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierID]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierID]"
+                      name="SupplierID" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierCompanyName]"
+                      dataType="wstr"
+                      length="40"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierCompanyName]"
+                      name="SupplierCompanyName" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierCity]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierCity]"
+                      name="SupplierCity" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierRegion]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierRegion]"
+                      name="SupplierRegion" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierCountry]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[SupplierCountry]"
+                      name="SupplierCountry" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[CategoryID]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[CategoryID]"
+                      name="CategoryID" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ProductCategoryName]"
+                      dataType="wstr"
+                      length="15"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ProductCategoryName]"
+                      name="ProductCategoryName" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ETLTime]"
+                      name="ETLTime" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimProduct\Insert into DimProduct1"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimProduct1"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimProduct]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimProduct\Insert into DimProduct1.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[ProductIDBK]"
+                      cachedDataType="i4"
+                      cachedName="ProductIDBK"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductIDBK]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductIDBK]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductName"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[SupplierID]"
+                      cachedDataType="i4"
+                      cachedName="SupplierID"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierID]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierID]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[SupplierCompanyName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="SupplierCompanyName"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCompanyName]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCompanyName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[SupplierCity]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SupplierCity"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCity]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCity]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[SupplierRegion]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SupplierRegion"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierRegion]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierRegion]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[SupplierCountry]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SupplierCountry"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCountry]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCountry]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[ProductCategoryName]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ProductCategoryName"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryName]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductCategoryName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[ETLTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ETLTime"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ETLTime]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].Columns[CategoryID]"
+                      cachedDataType="i4"
+                      cachedName="CategoryID"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryID]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[CategoryID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductIDBK]"
+                      dataType="i4"
+                      name="ProductIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="50"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierID]"
+                      dataType="i4"
+                      name="SupplierID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCompanyName]"
+                      dataType="wstr"
+                      length="50"
+                      name="SupplierCompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCity]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierCity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierRegion]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierRegion" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCountry]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryID]"
+                      dataType="i4"
+                      name="ProductCategoryID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryName]"
+                      dataType="wstr"
+                      length="30"
+                      name="ProductCategoryName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimProduct\Insert into DimProduct1.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Insert into DimProduct1.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Insert into DimProduct1.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimProduct\Insert into DimProduct2"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimProduct2"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimProduct]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimProduct\Insert into DimProduct2.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[ProductIDBK]"
+                      cachedDataType="i4"
+                      cachedName="ProductIDBK"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductIDBK]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductIDBK]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductName"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[SupplierID]"
+                      cachedDataType="i4"
+                      cachedName="SupplierID"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierID]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierID]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[SupplierCompanyName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="SupplierCompanyName"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCompanyName]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCompanyName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[SupplierCity]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SupplierCity"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCity]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCity]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[SupplierRegion]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SupplierRegion"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierRegion]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierRegion]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[SupplierCountry]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SupplierCountry"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCountry]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCountry]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[ProductCategoryName]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ProductCategoryName"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryName]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductCategoryName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[ETLTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ETLTime"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ETLTime]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].Columns[CategoryID]"
+                      cachedDataType="i4"
+                      cachedName="CategoryID"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryID]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[CategoryID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductIDBK]"
+                      dataType="i4"
+                      name="ProductIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="50"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierID]"
+                      dataType="i4"
+                      name="SupplierID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCompanyName]"
+                      dataType="wstr"
+                      length="50"
+                      name="SupplierCompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCity]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierCity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierRegion]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierRegion" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCountry]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryID]"
+                      dataType="i4"
+                      name="ProductCategoryID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryName]"
+                      dataType="wstr"
+                      length="30"
+                      name="ProductCategoryName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimProduct\Insert into DimProduct2.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Insert into DimProduct2.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Insert into DimProduct2.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Insert into DimProduct\Insert into DimProduct3"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="Insert into DimProduct3"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[dbo].[DimProduct]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Insert into DimProduct\Insert into DimProduct3.Connections[OleDbConnection]"
+                  connectionManagerID="{F7D2E82C-924C-4853-B425-3D99F6ED2440}:external"
+                  connectionManagerRefId="Project.ConnectionManagers[NorthwindDW]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[ProductKey]"
+                      cachedDataType="i4"
+                      cachedName="ProductKey"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductKey]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[ProductIDBK]"
+                      cachedDataType="i4"
+                      cachedName="ProductIDBK"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductIDBK]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductIDBK]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[ProductName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="ProductName"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[SupplierID]"
+                      cachedDataType="i4"
+                      cachedName="SupplierID"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierID]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierID]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[SupplierCompanyName]"
+                      cachedDataType="wstr"
+                      cachedLength="40"
+                      cachedName="SupplierCompanyName"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCompanyName]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCompanyName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[SupplierCity]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SupplierCity"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCity]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCity]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[SupplierRegion]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SupplierRegion"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierRegion]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierRegion]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[SupplierCountry]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="SupplierCountry"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCountry]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[SupplierCountry]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[ProductCategoryName]"
+                      cachedDataType="wstr"
+                      cachedLength="15"
+                      cachedName="ProductCategoryName"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryName]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ProductCategoryName]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[ETLTime]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ETLTime"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[ETLTime]" />
+                    <inputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].Columns[CategoryID]"
+                      cachedDataType="i4"
+                      cachedName="CategoryID"
+                      externalMetadataColumnId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryID]"
+                      lineageId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output].Columns[CategoryID]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductKey]"
+                      dataType="i4"
+                      name="ProductKey" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductIDBK]"
+                      dataType="i4"
+                      name="ProductIDBK" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductName]"
+                      dataType="wstr"
+                      length="50"
+                      name="ProductName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierID]"
+                      dataType="i4"
+                      name="SupplierID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCompanyName]"
+                      dataType="wstr"
+                      length="50"
+                      name="SupplierCompanyName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCity]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierCity" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierRegion]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierRegion" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[SupplierCountry]"
+                      dataType="wstr"
+                      length="15"
+                      name="SupplierCountry" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryID]"
+                      dataType="i4"
+                      name="ProductCategoryID" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ProductCategoryName]"
+                      dataType="wstr"
+                      length="30"
+                      name="ProductCategoryName" />
+                    <externalMetadataColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input].ExternalColumns[ETLTime]"
+                      dataType="dbTimeStamp"
+                      name="ETLTime" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Insert into DimProduct\Insert into DimProduct3.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Insert into DimProduct3.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Insert into DimProduct\Insert into DimProduct3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Insert into DimProduct\Insert into DimProduct3.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Insert into DimProduct.Paths[Balanced Data Distributor Output 1]"
+              endId="Package\Insert into DimProduct\Insert into DimProduct1.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 1"
+              startId="Package\Insert into DimProduct\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 1]" />
+            <path
+              refId="Package\Insert into DimProduct.Paths[Balanced Data Distributor Output 2]"
+              endId="Package\Insert into DimProduct\Insert into DimProduct2.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 2"
+              startId="Package\Insert into DimProduct\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 2]" />
+            <path
+              refId="Package\Insert into DimProduct.Paths[Balanced Data Distributor Output 3]"
+              endId="Package\Insert into DimProduct\Insert into DimProduct3.Inputs[OLE DB Destination Input]"
+              name="Balanced Data Distributor Output 3"
+              startId="Package\Insert into DimProduct\Balanced Data Distributor.Outputs[Balanced Data Distributor Output 3]" />
+            <path
+              refId="Package\Insert into DimProduct.Paths[OLE DB Source Output]"
+              endId="Package\Insert into DimProduct\Balanced Data Distributor.Inputs[Balanced Data Distributor Input]"
+              name="OLE DB Source Output"
+              startId="Package\Insert into DimProduct\Get Data from Products.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Truncate DimProduct"
+      DTS:CreationName="Microsoft.ExecuteSQLTask"
+      DTS:Description="Execute SQL Task"
+      DTS:DTSID="{9A8D429C-1381-4FDF-80C0-CBE1DF57EE48}"
+      DTS:ExecutableType="Microsoft.ExecuteSQLTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Truncate DimProduct"
+      DTS:TaskContact="Execute SQL Task; Microsoft Corporation; SQL Server 2022; © 2022 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{F7D2E82C-924C-4853-B425-3D99F6ED2440}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE DimProduct" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{C569AEC6-D4CE-43BC-A92A-6CFAB671BA73}"
+      DTS:From="Package\Truncate DimProduct"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert into DimProduct" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="177.6,41.6"
+          Id="Package\Truncate DimProduct"
+          TopLeft="346.428572166027,40.5294117291803" />
+        <NodeLayout
+          Size="184.8,41.6"
+          Id="Package\Insert into DimProduct"
+          TopLeft="347.857143597639,149.117646928116" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="437.742857881833,82.1294117291803">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,66.9882351989359"
+              Start="0,0"
+              End="0,59.4882351989359">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,59.4882351989359" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Insert into DimProduct">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mssgm="clr-namespace:Microsoft.SqlServer.Graph.Model;assembly=Microsoft.SqlServer.Graph">
+        <NodeLayout
+          Size="189.6,41.6"
+          Id="Package\Insert into DimProduct\Get Data from Products"
+          TopLeft="407.857143725363,29.0588235039405" />
+        <NodeLayout
+          Size="198.4,41.6"
+          Id="Package\Insert into DimProduct\Balanced Data Distributor"
+          TopLeft="412.857143736007,142.235293992972" />
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\Insert into DimProduct\Insert into DimProduct1"
+          TopLeft="190.714286120266,246.999999783495" />
+        <EdgeLayout
+          Id="Package\Insert into DimProduct.Paths[OLE DB Source Output]"
+          TopLeft="502.657143725363,70.6588235039406">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="9.40000001064391,71.5764704890317"
+              Start="0,0"
+              End="9.40000001064391,64.0764704890317">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,31.7882352445159" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,31.7882352445159"
+                    Point2="0,35.7882352445159"
+                    Point3="4,35.7882352445159" />
+                  <mssgle:LineSegment
+                    End="5.40000001064391,35.7882352445159" />
+                  <mssgle:CubicBezierSegment
+                    Point1="5.40000001064391,35.7882352445159"
+                    Point2="9.40000001064391,35.7882352445159"
+                    Point3="9.40000001064391,39.7882352445159" />
+                  <mssgle:LineSegment
+                    End="9.40000001064391,64.0764704890317" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\Insert into DimProduct.Paths[Balanced Data Distributor Output 1]"
+          TopLeft="512.057143736007,183.835293992972">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-225.742857615741,63.1647057905226"
+              Start="0,0"
+              End="-225.742857615741,55.6647057905226">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5823528952613" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.5823528952613"
+                    Point2="0,31.5823528952613"
+                    Point3="-4,31.5823528952613" />
+                  <mssgle:LineSegment
+                    End="-221.742857615741,31.5823528952613" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-221.742857615741,31.5823528952613"
+                    Point2="-225.742857615741,31.5823528952613"
+                    Point3="-225.742857615741,35.5823528952613" />
+                  <mssgle:LineSegment
+                    End="-225.742857615741,55.6647057905226" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-190.571995214121,36.5823528952613,155.4011328125,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\Insert into DimProduct\Insert into DimProduct2"
+          TopLeft="417.142858030844,249.188235164751" />
+        <EdgeLayout
+          Id="Package\Insert into DimProduct.Paths[Balanced Data Distributor Output 2]"
+          TopLeft="543.790477069341,183.835293992972">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-31.0476190384962,65.3529411717786"
+              Start="0,0"
+              End="-31.0476190384962,57.8529411717786">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,22.454870586336" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,22.454870586336"
+                    Point2="0,26.454870586336"
+                    Point3="-4,26.454870586336" />
+                  <mssgle:LineSegment
+                    End="-27.0476190384962,26.454870586336" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-27.0476190384962,26.454870586336"
+                    Point2="-31.0476190384962,26.454870586336"
+                    Point3="-31.0476190384962,30.454870586336" />
+                  <mssgle:LineSegment
+                    End="-31.0476190384962,57.8529411717786" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="-93.4099228004981,31.454870586336,155.7722265625,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="191.2,41.6"
+          Id="Package\Insert into DimProduct\Insert into DimProduct3"
+          TopLeft="657.857144257548,249.847058782641" />
+        <EdgeLayout
+          Id="Package\Insert into DimProduct.Paths[Balanced Data Distributor Output 3]"
+          TopLeft="559.657143736007,183.835293992972">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="193.800000521541,66.0117647896691"
+              Start="0,0"
+              End="193.800000521541,58.5117647896691">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.587579994343" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.587579994343"
+                    Point2="0,22.587579994343"
+                    Point3="4,22.587579994343" />
+                  <mssgle:LineSegment
+                    End="189.800000521541,22.587579994343" />
+                  <mssgle:CubicBezierSegment
+                    Point1="189.800000521541,22.587579994343"
+                    Point2="193.800000521541,22.587579994343"
+                    Point3="193.800000521541,26.587579994343" />
+                  <mssgle:LineSegment
+                    End="193.800000521541,58.5117647896691" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <mssgm:EdgeLabel
+              BoundingBox="19.0773635420203,27.587579994343,155.6452734375,11.609375"
+              RelativePosition="Any" />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into DimProduct\Get Data from Products">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Insert into DimProduct\Insert into DimProduct1">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
